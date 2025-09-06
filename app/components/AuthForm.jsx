@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 
 
 
-const AuthForm = () => {
+const AuthForm = ({ t }) => {
   const [isLogin, setIsLogin] = useState(true)
   const [phoneNumber, setPhoneNumber] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
@@ -39,10 +39,10 @@ const AuthForm = () => {
           // Redirect to the profile page
           router.push('/profile');  // Adjust the path as needed
         } else {
-          setError('Login failed: Invalid credentials');
+          setError(t?.loginFailed || 'Login failed: Invalid credentials');
         }
       } catch (error) {
-        setError('Login failed: Invalid credentials');
+        setError(t?.loginFailed || 'Login failed: Invalid credentials');
       }
     } else {
       try {
@@ -54,10 +54,10 @@ const AuthForm = () => {
           // Redirect to the profile page
           router.push('/profile');  // Adjust the path as needed
         } else {
-          setError('Login failed: Invalid credentials');
+          setError(t?.loginFailed || 'Login failed: Invalid credentials');
         }
       } catch (error) {
-        setError('Login failed: Invalid credentials');
+        setError(t?.loginFailed || 'Login failed: Invalid credentials');
       }
     }
   };
@@ -70,14 +70,14 @@ const AuthForm = () => {
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
       <h2 className="text-2xl font-bold mb-6 text-center">
-        {isLogin ? 'Login' : 'Register'}
+        {isLogin ? t?.loginTitle || 'Login' : t?.registerTitle || 'Register'}
       </h2>
       <form onSubmit={handleSubmit}>
         {isLogin ? (
           <>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
-                Phone Number
+                {t?.phoneNumber || 'Phone Number'}
               </label>
               <InputMask
                 mask="+7 (999) 999-99-99"
@@ -86,19 +86,19 @@ const AuthForm = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="phone"
                 type="tel"
-                placeholder="+7 (___) ___-__-__"
+                placeholder={t?.phonePlaceholder || "+7 (___) ___-__-__"}
                 required
               />
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                Password
+                {t?.password || 'Password'}
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
                 type="password"
-                placeholder="Enter your password"
+                placeholder={t?.passwordPlaceholder || "Enter your password"}
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
                 required
@@ -109,13 +109,13 @@ const AuthForm = () => {
           <>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                Name
+                {t?.name || 'Name'}
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="name"
                 type="text"
-                placeholder="Enter your name"
+                placeholder={t?.namePlaceholder || "Enter your name"}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -123,13 +123,13 @@ const AuthForm = () => {
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="surname">
-                Surname
+                {t?.surname || 'Surname'}
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="surname"
                 type="text"
-                placeholder="Enter your surname"
+                placeholder={t?.surnamePlaceholder || "Enter your surname"}
                 value={surname}
                 onChange={(e) => setSurname(e.target.value)}
                 required
@@ -137,7 +137,7 @@ const AuthForm = () => {
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
-                Phone Number
+                {t?.phoneNumber || 'Phone Number'}
               </label>
               <InputMask
                 mask="+7 (999) 999-99-99"
@@ -146,19 +146,19 @@ const AuthForm = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="phone"
                 type="tel"
-                placeholder="+7 (___) ___-__-__"
+                placeholder={t?.phonePlaceholder || "+7 (___) ___-__-__"}
                 required
               />
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                Password
+                {t?.password || 'Password'}
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
                 type="password"
-                placeholder="Enter your password"
+                placeholder={t?.passwordPlaceholder || "Enter your password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -166,13 +166,13 @@ const AuthForm = () => {
             </div>
             <div className="mb-6">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="repeatPassword">
-                Repeat Password
+                {t?.repeatPassword || 'Repeat Password'}
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="repeatPassword"
                 type="password"
-                placeholder="Repeat your password"
+                placeholder={t?.repeatPasswordPlaceholder || "Repeat your password"}
                 value={repeatPassword}
                 onChange={(e) => setRepeatPassword(e.target.value)}
                 required
@@ -189,14 +189,14 @@ const AuthForm = () => {
             className="bg-[#FFAD00] hover:bg-[#FFB824] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            {isLogin ? 'Login' : 'Register'}
+            {isLogin ? (t?.loginButton || 'Login') : (t?.registerButton || 'Register')}
           </motion.button>
           <button
             className="inline-block align-baseline font-bold text-sm text-[#FFAD00] hover:text-[#FFB824]"
             type="button"
             onClick={() => setIsLogin(!isLogin)}
           >
-            {isLogin ? 'Need an account?' : 'Already have an account?'}
+            {isLogin ? (t?.needAccount || 'Need an account?') : (t?.haveAccount || 'Already have an account?')}
           </button>
         </div>
       </form>

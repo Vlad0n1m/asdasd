@@ -41,9 +41,9 @@ const services = [
     icon: DollarSign,
     label: { en: 'Affordable Price', ru: 'Выгодная цена', kz: 'Қолайлы баға' },
     description: {
-      en: 'Only 3950 KZT per year!',
-      ru: 'Всего 3950 тенге в год!',
-      kz: 'Жылына бар болғаны 3950 теңге!',
+      en: 'Only 4950 KZT per year!',
+      ru: 'Всего 4950 тенге в год!',
+      kz: 'Жылына бар болғаны 4950 теңге!',
     },
   },
   {

@@ -25,7 +25,7 @@ const Subscription = ({ isProfileComplete, hasActiveSubscription, onSubscribe, t
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="border p-4 rounded-md">
                   <h4 className="font-bold">{translations.yearly}</h4>
-                  <p>{translations.price}: 3950 тенге {translations.perYear}</p>
+                  <p>{translations.price}: 4950 тенге {translations.perYear}</p>
                   <button
                     onClick={onSubscribe}
                     className="mt-2 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"

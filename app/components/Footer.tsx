@@ -18,10 +18,7 @@ export default function Footer({ t }: any) {
           <div>
             <h3 className="text-lg font-semibold mb-4">{t.links}</h3>
             <ul>
-              <li><a href="#" className="hover:text-[#FFAD00]">{t.aboutUs}</a></li>
               <li><a href="/OFERTA.docx" className="hover:text-[#FFAD00]">{t.terms}</a></li>
-              <li><a href="#" className="hover:text-[#FFAD00]">{t.privacy}</a></li>
-              <li><a href="#" className="hover:text-[#FFAD00]">{t.faq}</a></li>
             </ul>
           </div>
         </div>
