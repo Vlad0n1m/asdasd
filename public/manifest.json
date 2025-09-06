@@ -1,0 +1,27 @@
+{
+  "name": "JOL911 - Помощь на дороге в Астане",
+  "short_name": "JOL911",
+  "description": "Круглосуточная помощь на дороге в Астане. Трезвый водитель, эвакуатор, зарядка АКБ. Всего 4950₸ в год!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F6F6F6",
+  "theme_color": "#FFAD00",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["automotive", "business", "utilities"],
+  "lang": "ru-KZ",
+  "dir": "ltr"
+}

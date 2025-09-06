@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://jol911.com/</loc>
+    <lastmod>2024-12-19T10:00:00+06:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru-KZ" href="https://jol911.com/" />
+    <xhtml:link rel="alternate" hreflang="kk-KZ" href="https://jol911.com/kz" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://jol911.com/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jol911.com/" />
+    <image:image>
+      <image:loc>https://jol911.com/logo.png</image:loc>
+      <image:title>JOL911 - Помощь на дороге в Астане</image:title>
+      <image:caption>Круглосуточная помощь на дороге, трезвый водитель, эвакуатор</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://jol911.com/auth</loc>
+    <lastmod>2024-12-19T10:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jol911.com/profile</loc>
+    <lastmod>2024-12-19T10:00:00+06:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>

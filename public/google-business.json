@@ -1,0 +1,87 @@
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "JOL911 - Помощь на дороге",
+  "image": "https://jol911.com/logo.png",
+  "description": "Круглосуточная помощь на дороге в Астане. Трезвый водитель, эвакуатор, зарядка аккумулятора, техпомощь. Всего 4950 тенге в год!",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "ул. Кошкарбаева 40",
+    "addressLocality": "Астана",
+    "addressRegion": "Акмолинская область",
+    "postalCode": "010000",
+    "addressCountry": "KZ"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 51.1694,
+    "longitude": 71.4491
+  },
+  "url": "https://jol911.com",
+  "telephone": "+77009119911",
+  "email": "info@jol911.com",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    ],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "priceRange": "4950 KZT",
+  "currenciesAccepted": "KZT",
+  "paymentAccepted": "Cash, Card, Bank Transfer",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Услуги помощи на дороге",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Трезвый водитель",
+          "description": "Профессиональный водитель приедет в любую точку Астаны"
+        },
+        "price": "4950",
+        "priceCurrency": "KZT"
+      },
+      {
+        "@type": "Offer", 
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Эвакуатор",
+          "description": "Безопасная транспортировка автомобиля"
+        },
+        "price": "4950",
+        "priceCurrency": "KZT"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service", 
+          "name": "Зарядка аккумулятора",
+          "description": "Быстрое восстановление заряда АКБ"
+        },
+        "price": "4950",
+        "priceCurrency": "KZT"
+      }
+    ]
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Астана",
+    "containedInPlace": {
+      "@type": "Country",
+      "name": "Казахстан"
+    }
+  },
+  "serviceArea": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": 51.1694,
+      "longitude": 71.4491
+    },
+    "geoRadius": "100000"
+  }
+}
