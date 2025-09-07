@@ -26,9 +26,9 @@ export default function ProfilePage() {
   const ft = languages[language].footer
 
   const router = useRouter()
-  // if (!tokenService.getAccessToken()) {
-  //   router.push('/auth');
-  // }
+  if (!tokenService.getAccessToken()) {
+    router.push('/auth');
+  }
   const updateProfile = async () => {
 
     setIsLoading(true)
@@ -172,7 +172,7 @@ export default function ProfilePage() {
               translations={t.profileCompletion}
             />
             <Subscription
-              isProfileComplete={true}
+              isProfileComplete={isProfileComplete}
               hasActiveSubscription={hasActiveSubscription}
               onSubscribe={buySubscription}
               translations={t.subscription}

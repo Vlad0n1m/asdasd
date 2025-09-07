@@ -35,85 +35,81 @@ const Subscription = ({ isProfileComplete, hasActiveSubscription, onSubscribe, t
   // Функция инициализации платежа через TipTop Pay
   const initiateTipTopPayment = () => {
     // Проверяем доступность TipTop Pay API
-    if (!window.cp) {
+    if (!window.tiptop) {
       console.error('TipTop Pay API not available')
       alert('TipTop Pay не загружен. Попробуйте позже.')
       return
     }
 
     // Логируем доступные методы для отладки
-    console.log('Available cp methods:', Object.keys(window.cp))
-    console.log('Full cp object:', window.cp)
+    console.log('Available tiptop methods:', Object.keys(window.tiptop))
+    console.log('Full tiptop object:', window.tiptop)
 
     try {
-      // Используем правильную структуру API: CloudPayments конструктор
-      if (typeof window.cp.CloudPayments !== 'undefined') {
-        const widget = new window.cp.CloudPayments()
+      // Используем правильную структуру API: новый TipTop Pay Widget
+      if (typeof window.tiptop.Widget !== 'undefined') {
+        const widget = new window.tiptop.Widget()
         
-        if (widget && typeof widget.pay === 'function') {
-          widget.pay({
-            publicId: 'pk_5aabb0f09974f172942e79a9997c1',
-            description: 'Подписка Premium на год - jol911.kz',
-            amount: 4950,
-            currency: 'KZT',
-            invoiceId: `subscription_${Date.now()}`,
+        // Параметры для TipTop Pay согласно документации
+        const intentParams = {
+          publicTerminalId: 'pk_5aabb0f09974f172942e79a9997c1', 
+          description: 'Подписка Premium на год - jol911.kz',
+          paymentSchema: 'Single', // одностадийная оплата
+          currency: 'KZT',
+          amount: 4950,
+          externalId: `subscription_${Date.now()}`, // идентификатор платежа
+          userInfo: {
             accountId: userProfile?.phone_number || 'user_subscription',
+            firstName: userProfile?.first_name || 'User',
+            lastName: userProfile?.last_name || 'User',
+            phone: userProfile?.phone_number || '',
+            email: userProfile?.email || ''
+          },
+          items: [{
+            id: 'premium_subscription_yearly',
+            name: 'Premium подписка на год',
+            count: 1,
+            price: 4950
+          }],
+          receipt: {
+            items: [{
+              label: 'Premium подписка на год - jol911.kz',
+              price: 4950.00,
+              quantity: 1.00,
+              amount: 4950.00,
+              vat: 0,
+              measurementUnit: 'шт'
+            }],
+            calculationPlace: 'jol911.kz',
+            taxationSystem: 0,
             email: userProfile?.email || '',
-            skin: 'mini',
-            language: 'kz'
-          }, {
-            onSuccess: function(options) {
-              console.log('Платеж успешен:', options)
-              onSubscribe(options.transactionId)
-            },
-            onFail: function(reason, options) {
-              console.error('Ошибка платежа:', reason, options)
-              alert('Ошибка при оплате: ' + reason)
-            },
-            onComplete: function(paymentResult, options) {
-              console.log('Платеж завершен:', paymentResult, options)
+            phone: userProfile?.phone_number || '',
+            isBso: false,
+            amounts: {
+              electronic: 4950.00,
+              cash: 0.00
             }
-          })
-        } else {
-          console.error('CloudPayments widget created but no pay method available')
-          alert('Ошибка инициализации платежного виджета.')
+          },
+          successRedirectUrl: window.location.origin + '/profile?payment=success',
+          failRedirectUrl: window.location.origin + '/profile?payment=failed',
+          receiptEmail: userProfile?.email || ''
         }
-      } else if (typeof window.cp.Widget !== 'undefined') {
-        // Альтернативный подход с Widget
-        const widget = new window.cp.Widget()
         
-        if (widget && typeof widget.pay === 'function') {
-          widget.pay({
-            publicId: 'pk_5aabb0f09974f172942e79a9997c1',
-            description: 'Подписка Premium на год - jol911.kz',
-            amount: 4950,
-            currency: 'KZT',
-            invoiceId: `subscription_${Date.now()}`,
-            accountId: userProfile?.phone_number || 'user_subscription',
-            email: userProfile?.email || '',
-            skin: 'mini',
-            language: 'kz'
-          }, {
-            onSuccess: function(options) {
-              console.log('Платеж успешен:', options)
-              onSubscribe(options.transactionId)
-            },
-            onFail: function(reason, options) {
-              console.error('Ошибка платежа:', reason, options)
-              alert('Ошибка при оплате: ' + reason)
-            },
-            onComplete: function(paymentResult, options) {
-              console.log('Платеж завершен:', paymentResult, options)
-            }
-          })
-        } else {
-          console.error('Widget created but no pay method available')
-          alert('Ошибка инициализации платежного виджета.')
-        }
+        // Запускаем виджет
+        widget.start(intentParams).then(function(widgetResult) {
+          console.log('TipTop Pay result:', widgetResult)
+          // Успешная оплата
+          if (widgetResult && (widgetResult.success || widgetResult.transactionId)) {
+            onSubscribe(widgetResult.transactionId || widgetResult.id)
+          }
+        }).catch(function(error) {
+          console.error('TipTop Pay error:', error)
+          alert('Ошибка при оплате: ' + (error.message || error))
+        })
+        
       } else {
-        console.error('No suitable payment method found in cp object')
-        console.log('Available methods:', Object.keys(window.cp))
-        alert('Ошибка инициализации TipTop Pay. API недоступен.')
+        console.error('TipTop Pay Widget not found')
+        alert('Ошибка инициализации TipTop Pay. Виджет недоступен.')
       }
     } catch (error) {
       console.error('Error initializing TipTop Pay payment:', error)
