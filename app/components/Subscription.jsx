@@ -52,7 +52,7 @@ const Subscription = ({ isProfileComplete, hasActiveSubscription, onSubscribe, t
         
         // Параметры для TipTop Pay согласно документации
         const intentParams = {
-          publicTerminalId: 'pk_5aabb0f09974f172942e79a9997c1', 
+          publicTerminalId: 'test_api_00000000000000000000002', 
           description: 'Подписка Premium на год - jol911.kz',
           paymentSchema: 'Single', // одностадийная оплата
           currency: 'KZT',
