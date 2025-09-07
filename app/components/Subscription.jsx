@@ -100,7 +100,7 @@ const Subscription = ({ isProfileComplete, hasActiveSubscription, onSubscribe, t
           console.log('TipTop Pay result:', widgetResult)
           // Успешная оплата
           if (widgetResult && (widgetResult.status == 'success' || widgetResult.transactionId)) {
-            onSubscribe(widgetResult.transactionId || widgetResult.id)
+            onSubscribe()
           }
         }).catch(function(error) {
           console.error('TipTop Pay error:', error)

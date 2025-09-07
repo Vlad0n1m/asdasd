@@ -128,7 +128,7 @@ export default function ProfilePage() {
   }, [hasActiveSubscription])
 
 
-  const buySubscription = async (transactionId) => {
+  const buySubscription = async () => {
     try {
       // После успешной оплаты через TipTop Pay создаем подписку
       const response = await postWithToken('/auth/subscription/')
