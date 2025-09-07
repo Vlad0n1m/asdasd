@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import InputMask from 'react-input-mask'
 
 const ProfileCompletion = ({ profile, setProfile, hasActiveSubscription, updateProfile, isLoading }) => {
@@ -11,14 +11,14 @@ const ProfileCompletion = ({ profile, setProfile, hasActiveSubscription, updateP
 
     checkFull()
     
-  }, [])
-  const checkFormCompletion = () => {
+  }, [checkFull])
+  const checkFormCompletion = useCallback(() => {
     const requiredFields = ['first_name', 'last_name', 'birth_date', 'iin', 'city', 'car_registration_date', 'car_brand', 'car_model', 'car_plate_number']
     const isComplete = requiredFields.every((key) => profile[key] && !errors[key])
     return isComplete
-  }
+  }, [profile, errors])
 
-  const checkFull = () => {
+  const checkFull = useCallback(() => {
     console.log()
     if (checkFormCompletion()) {
       setIsFormCompleted(true)
@@ -26,7 +26,7 @@ const ProfileCompletion = ({ profile, setProfile, hasActiveSubscription, updateP
       setIsFormCompleted(false)
     }
     console.log(isFormCompleted);
-  }
+  }, [profile, errors, isFormCompleted, checkFormCompletion])
 
   const handleInputChange = (e) => {
     checkFull()

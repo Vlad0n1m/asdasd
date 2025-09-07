@@ -1,5 +1,9 @@
 'use client'
 
+// Отключаем статическую генерацию для этой страницы
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -15,20 +19,27 @@ import languages from './../data/languages'
 
 
 export default function ProfilePage() {
-
-
   const [isLoading, setIsLoading] = useState(false);
   const [isProfileComplete, setIsProfileComplete] = useState(false)
   const [hasActiveSubscription, setHasActiveSubscription] = useState(false)
   const [subscriptionDaysLeft, setSubscriptionDaysLeft] = useState(0)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const { language } = useLanguage()
   const t = languages[language].profile
   const ft = languages[language].footer
 
   const router = useRouter()
-  if (!tokenService.getAccessToken()) {
-    router.push('/auth');
-  }
+  
+  useEffect(() => {
+    // Проверяем аутентификацию только на клиенте
+    if (typeof window !== 'undefined') {
+      if (!tokenService.getAccessToken()) {
+        router.push('/auth');
+      } else {
+        setIsAuthenticated(true)
+      }
+    }
+  }, [router])
   const updateProfile = async () => {
 
     setIsLoading(true)
@@ -124,8 +135,10 @@ export default function ProfilePage() {
   }
 
   useEffect(() => {
-    fetchData()
-  }, [hasActiveSubscription])
+    if (isAuthenticated) {
+      fetchData()
+    }
+  }, [hasActiveSubscription, isAuthenticated])
 
 
   const buySubscription = async (transactionId) => {
@@ -141,6 +154,16 @@ export default function ProfilePage() {
       console.error('Error subscribing:', error)
       alert('Ошибка при создании подписки. Обратитесь в поддержку.')
     }
+  }
+
+  // Показываем загрузку пока не проверили аутентификацию
+  if (!isAuthenticated) {
+    return (
+      <div className="flex flex-col min-h-screen bg-[#F6F6F6] items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <p className="mt-4 text-gray-600">Проверка аутентификации...</p>
+      </div>
+    )
   }
 
   return (

@@ -93,7 +93,7 @@ export default function TestPaymentPage() {
       clearInterval(checkInterval)
       clearTimeout(timeout)
     }
-  }, [])
+  }, [scriptLoaded])
 
   // Функция инициализации тестового платежа через TipTop Pay
   const initiateTestPayment = () => {
@@ -381,7 +381,7 @@ export default function TestPaymentPage() {
           <h3 className="text-lg font-semibold mb-4">Инструкции для тестирования</h3>
           <div className="space-y-3 text-sm text-gray-600">
             <div>
-              <strong>1.</strong> Нажмите кнопку "Оплатить 100 тенге"
+              <strong>1.</strong> Нажмите кнопку &quot;Оплатить 100 тенге&quot;
             </div>
             <div>
               <strong>2.</strong> В открывшейся форме используйте тестовые данные карты

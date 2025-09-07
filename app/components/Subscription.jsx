@@ -73,7 +73,7 @@ const Subscription = ({ isProfileComplete, hasActiveSubscription, onSubscribe, t
       clearInterval(checkInterval)
       clearTimeout(timeout)
     }
-  }, [])
+  }, [scriptLoaded])
 
   // Функция инициализации платежа через TipTop Pay
   const initiateTipTopPayment = () => {
