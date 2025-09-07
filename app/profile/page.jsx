@@ -128,15 +128,18 @@ export default function ProfilePage() {
   }, [hasActiveSubscription])
 
 
-  const buySubscription = async () => {
+  const buySubscription = async (transactionId) => {
     try {
+      // После успешной оплаты через TipTop Pay создаем подписку
       const response = await postWithToken('/auth/subscription/')
       if (response.active) {
         setHasActiveSubscription(true)
         fetchData()
+        alert('Подписка успешно активирована!')
       }
     } catch (error) {
       console.error('Error subscribing:', error)
+      alert('Ошибка при создании подписки. Обратитесь в поддержку.')
     }
   }
 
@@ -174,8 +177,23 @@ export default function ProfilePage() {
               onSubscribe={buySubscription}
               translations={t.subscription}
               expiryDate={subscriptionDaysLeft}
+              userProfile={profile}
             />
             <FAQ translations={t.faq} />
+            
+            {/* Ссылка на тестовую страницу платежей */}
+            <div className="bg-white p-6 rounded-lg shadow-md text-center">
+              <h3 className="text-lg font-semibold mb-3 text-[#302E2F]">Тестирование платежей</h3>
+              <p className="text-gray-600 mb-4 text-sm">
+                Проверить работу TipTop Pay виджета с тестовой суммой 100 тенге
+              </p>
+              <a 
+                href="/test-payment"
+                className="inline-block bg-green-600 text-white py-2 px-6 rounded-md hover:bg-green-700 transition duration-300"
+              >
+                Тестовая страница платежей
+              </a>
+            </div>
           </div>
         </motion.div>
       </main>
