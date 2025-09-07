@@ -99,7 +99,7 @@ const Subscription = ({ isProfileComplete, hasActiveSubscription, onSubscribe, t
         widget.start(intentParams).then(function(widgetResult) {
           console.log('TipTop Pay result:', widgetResult)
           // Успешная оплата
-          if (widgetResult && (widgetResult.success || widgetResult.transactionId)) {
+          if (widgetResult && (widgetResult.status == 'success' || widgetResult.transactionId)) {
             onSubscribe(widgetResult.transactionId || widgetResult.id)
           }
         }).catch(function(error) {
